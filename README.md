@@ -3,4 +3,4 @@ Python scripts for managing satellite info.
 
 Scripts for nicely handling all information regarding the Delphini-1 Cubesat
 
-![alt text](https://raw.githubusercontent.com/kongstad/projectname/branch/path/to/img.png)
+!(https://github.com/Kongstad/Delphini-1-Satellite-Control-Software/blob/master/Splash_Delphini1.png)

@@ -229,7 +229,7 @@ spat=str(((tle_rec.elevation/1000)/650)*60)
 spacer='  '; #Unelegant method for spacing the lines
 
 #This creates the main window of an application
-window = tk.Toplevel()
+window = tk.Tk()
 window.title("Sat Track")
 window.geometry("1200x800")
 window.configure(background='#f0f0f0')

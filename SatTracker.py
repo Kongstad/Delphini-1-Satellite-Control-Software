@@ -1,23 +1,22 @@
 ############################################################################### 
 ## For info on basemap module see:                                            #
 ## http://basemaptutorial.readthedocs.io/en/latest/                           #
-## Author of this code: Peter Kongstad - kongstad25@gmail.com - November 2017 #
+## Author of this code: Peter Kongstad - kongstad25@gmail.com - December 2017 #
 ## Note it is build for python 2.7 and will not work correctly on python 3+   #
 ## Need to download and install google chrome webdriver for snapshot to work  #
 ###############################################################################
 
 #%% Imported modules
 import ephem
+import urllib2
+import math
 import numpy as np
 import matplotlib.pyplot as plt
+import time
 from mpl_toolkits.basemap import Basemap
-import urllib2
 from datetime import datetime
-import math
 #Selenium used for screenshot weather import - remember install ChromeDriver 
 from selenium import webdriver
-import time
-import webbrowser
 from PIL import Image
 
 
@@ -92,7 +91,7 @@ ylongr = str(x_long.split(sep, 1)[0])
 #Map perspective is set from the current lat/long of the satellite.
 fig = plt.figure(1)
 map = Basemap(projection='ortho',lon_0=ylongr,lat_0=ylattr,resolution='l')
-map.bluemarble() #Sets the graphics for the globe, different options on basemap site
+map.etopo() #Sets the graphics for the globe, different options on basemap site
 map.drawcoastlines(linewidth=0.25)
 map.drawcountries(linewidth=0.25)
 map.fillcontinents(color='green',lake_color='blue')
@@ -101,11 +100,11 @@ map.drawmeridians(np.arange(0,360,30))
 map.drawparallels(np.arange(-90,90,30))
 
 #This part plots the satellite as a red dot and with text, needs direct input of lonlat
-sat_lon,sat_lat=map(ylongr,ylattr)
-map.plot(sat_lon,sat_lat,marker='o',color='r')
-plt.text(sat_lon,sat_lat, name,fontsize=12,fontweight='bold',ha='right',va='bottom',color='w')
+sat_lon,sat_lat=map(ylongr,ylattr) #Converts strings to integers for Basemap requirement
+map.plot(sat_lon,sat_lat,marker='o',color='r') #Plots the red dot based on sat_lon and sat_lat
+plt.text(sat_lon,sat_lat, name,fontsize=12,fontweight='bold',ha='right',va='bottom',color='w') #Plots name of object
 
-#Paints a grid
+#Paints the generic grid on Earth and the penumbra distinguishing between night and day.
 nlats = 73; nlons = 145; delta = 2.*np.pi/(nlons-1)
 lats = (0.5*np.pi-delta*np.indices((nlats,nlons))[0,:,:])
 lons = (delta*np.indices((nlats,nlons))[1,:,:])
@@ -116,7 +115,7 @@ date = datetime.utcnow()
 CS=map.nightshade(date)
 plt.title('Globe View') 
 #plt.show()
-plt.savefig('Globeview.png')
+plt.savefig('Globeview.png')#Save the file for later usage
 
 
 
@@ -141,7 +140,7 @@ date = datetime.utcnow()
 CS=map.nightshade(date)
 plt.title('2D Map View')
 #plt.show()
-plt.savefig('MercatorView.png')
+plt.savefig('MercatorView.png')#Save the file for later usage
 
 #%% Adding weather client from openweathermap.org
 #Chromedriver must be installed on system in a path that python can recognize - https://sites.google.com/a/chromium.org/chromedriver/home
@@ -189,52 +188,49 @@ half_the_height = img.size[1] / 2
 img4 = img.crop(
     (
         half_the_width - 929/2,
-        half_the_height - 700/2,
+        half_the_height - 660/2,
         half_the_width + 929/2,
         half_the_height + 888/2
     )
 )
 img4.save("GECurrentcropped.png")
 
-#%% Displays the two imported images
-#webbrowser.open("currentweathercropped.png")
-#webbrowser.open("GECurrentcropped.png")
+
 
 #%% Resize images smaller
-basewidth = 300
-img = Image.open('currentweathercropped.png')
+basewidth = 380 #Sets the basewidth we desire
+img = Image.open('currentweathercropped.png') #Opens the already cropped weather map
 wpercent = (basewidth/float(img.size[0]))
 hsize = int((float(img.size[1])*float(wpercent)))
 img = img.resize((basewidth,hsize), Image.ANTIALIAS)
-img.save('currentweathercroppedsmall.png') 
+img.save('currentweathercroppedsmall.png') #Saves the resized image as a smaller version
 
-basewidth = 300
-img = Image.open('GECurrentcropped.png')
+basewidth = 380 #Sets the basewidth we desire
+img = Image.open('GECurrentcropped.png') #Opens the already cropped Google Earth map
 wpercent = (basewidth/float(img.size[0]))
 hsize = int((float(img.size[1])*float(wpercent)))
 img = img.resize((basewidth,hsize), Image.ANTIALIAS)
-img.save('GECurrentcroppedsmall.png') 
+img.save('GECurrentcroppedsmall.png') #Saves the resized image as a smaller version
 
-#%% GUI Interface
+#%% GU Interface
 
 import Tkinter as tk
 from tkFont import Font
 from PIL import ImageTk, Image
 from Tkinter import END
-
 #Converting information from floats to strings
 alt=str(altitude)
 vel=str(velocity/1000)
 spat=str(((tle_rec.elevation/1000)/650)*60)
-spacer='  '; #Unelegant method for spacing the lines
+space='  '; #Unelegant method for spacing the lines
 
 #This creates the main window of an application
 window = tk.Tk()
 window.title("Sat Track")
-window.geometry("1200x800")
+window.geometry("1200x900")
 window.configure(background='#f0f0f0')
-    
-                 
+
+      
 #Imports the pictures.
 pic1 = "Globeview.png"
 pic2 = "MercatorView.png"
@@ -253,7 +249,7 @@ header.pack()
 toprow = tk.Frame(window)
 infobox = tk.Text(toprow, width=50, height=7, font=("Calibri",12))
 infobox.pack(side = "left") 
-infobox.insert(END,"Current information for:"+spacer+name +'\n'+
+infobox.insert(END,"Current information for:"+space+name +'\n'+
                "Time:" +space+times+ '\n'+
                "Longitude:"+space +x_long+ '\n'+
                "Latitude:" +space+x_lat+ '\n'+     
@@ -277,5 +273,23 @@ gearth = tk.Label(bottomrow, image = img4)
 gearth.pack(side = "left")
 bottomrow.pack()
 
-#Start the GUI
+bottomtext = tk.Frame(window)
+currentweather1 = tk.Label(bottomtext, text="Current Weather")
+currentweather1.pack(side = "left")
+spacers = tk.Label(bottomtext, text="                                                                                  ")
+spacers.pack(side="left")
+gearth1 = tk.Label(bottomtext, text="Google Earth Image")
+gearth1.pack(side = "left")
+bottomtext.pack()
+
+def RefreshAction():
+    execfile("SatTracker.py")
+
+def CloseWindow():
+    window.destroy()
+
+button = tk.Frame(window)
+button = tk.Button(text='Refresh Data', width=25,command=lambda:[CloseWindow(),RefreshAction()])
+button.pack()
+
 window.mainloop()

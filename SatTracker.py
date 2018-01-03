@@ -282,14 +282,14 @@ gearth1 = tk.Label(bottomtext, text="Google Earth Image")
 gearth1.pack(side = "left")
 bottomtext.pack()
 
-def RefreshAction():
-    execfile("SatTracker.py")
-
-def CloseWindow():
-    window.destroy()
-
-button = tk.Frame(window)
-button = tk.Button(text='Refresh Data', width=25,command=lambda:[CloseWindow(),RefreshAction()])
-button.pack()
+#def RefreshAction():
+#    execfile("SatTracker.py")
+#
+#def CloseWindow():
+#    window.destroy()
+#
+#button = tk.Frame(window)
+#button = tk.Button(text='Refresh Data', width=25,command=lambda:[CloseWindow(),RefreshAction()])
+#button.pack()
 
 window.mainloop()

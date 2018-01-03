@@ -2,7 +2,7 @@
 
 List of content.
 
-SatTracker.html - Contains the finished product in coloured HTML format. Recommend it for reading about the project
+<b>SatTracker.html</b> - Contains the finished product in coloured HTML format. Recommend it for reading about the project
 SatTracker.ipynb - The Jupyter notebook file, requires Python2 environment.
 SatTracker.py - The complete script.
 SatTracker_Kongstad.pdf - Contains the Notebook converted version to latex and then PDF. I recommend opening the HTML file instead.

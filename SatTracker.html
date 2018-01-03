@@ -11775,16 +11775,38 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h1><p>Author of this code: Peter Kongstad - kongstad25@gmail.com - December 2017<br>
-Student ID: AU484199</p>
+<h1 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h1><p>Author of this code: Peter Kongstad
+<p>E-mail: Kongstad25@gmail.com</p>
+<p>Date: December 2017</p>
+<p>Student ID: AU484199</p>
 <p>This script will extract most current Two-Line Element data on any given object orbiting Earth. The TLE data are imported and scrutinized by modules such as ephem, numpy and then finally plotted by the module matplot and the basemap toolkit. For snapshotting most recent weather data and Google Earth imagery, the selenium module and the google chrome webdriver is utilized. These images are then stored, resized and unnecessary image data is cut from the image. As a final step these 4 images along with orbital parameters are shown in the GUI Tkinter.</p>
-<h6 id="#">#<a class="anchor-link" href="##">&#182;</a></h6><p>For info on basemap module see:<br>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="User-Manual">User Manual<a class="anchor-link" href="#User-Manual">&#182;</a></h1><p>The script requires quite a few non-standard modules to execute.
+Bare in mind it takes about 40 seconds to run, as the script makes 3 queries to websites such as: Celestrak, OpenWeatherMap and Google Maps.</p>
+<p>For info on basemap module see:<br>
 <a href="http://basemaptutorial.readthedocs.io/en/latest/">http://basemaptutorial.readthedocs.io/en/latest/</a><br>
-Note this script is build for python 2.7 and will not work correctly on python 3+<br>
-Need to download and install google chrome webdriver for snapshot to work:</p>
-<p><a href="https://sites.google.com/a/chromium.org/chromedriver/home">https://sites.google.com/a/chromium.org/chromedriver/home</a> and be put into the
+Note this script is build for python 2.7 and will not work correctly on python 3+</p>
+<p>You are required to download and install google chrome webdriver for snapshot to work:
+<a href="https://sites.google.com/a/chromium.org/chromedriver/home">https://sites.google.com/a/chromium.org/chromedriver/home</a> and it needs to be put into the
 python PATH.</p>
-<h6 id="#">#<a class="anchor-link" href="##">&#182;</a></h6><p>Lastly the code is based on python 2.7 as instructed for this course. This has lead to the trouble of modules experiencing fall-outs, fonts to appear strange and some linux-machines failing to correctly store the snapshots or/and resizing the images. I strongly advice running this script on a Windows machine with python 2.7, as it will produce the desired outcome.</p>
+<h2 id="All-Modules-needed-(Python-2.7)">All Modules needed (Python 2.7)<a class="anchor-link" href="#All-Modules-needed-(Python-2.7)">&#182;</a></h2><p>ephem,
+urllib2,
+numpy,
+matplotlib,
+math,
+time,
+Basemap,
+datetime,
+selenium,
+PIL</p>
+<p>Lastly the code is based on python 2.7 as instructed for this course. This has lead to the trouble of modules experiencing fall-outs, fonts to appear strange and some linux-machines failing to correctly store the snapshots or/and resizing the images - This is partially due to lack of support of old versions. I strongly advice running this script on a Windows machine with python 2.7, as it will produce the desired outcome.</p>
 
 </div>
 </div>
@@ -11832,7 +11854,7 @@ python PATH.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="1.Importing-TLE-and-deducing-the-Satellite-Coordinates">1.Importing TLE and deducing the Satellite Coordinates<a class="anchor-link" href="#1.Importing-TLE-and-deducing-the-Satellite-Coordinates">&#182;</a></h1>
+<h1 id="1.Importing-TLE-and-obtaining-the-Satellite-Coordinates">1.Importing TLE and obtaining the Satellite Coordinates<a class="anchor-link" href="#1.Importing-TLE-and-obtaining-the-Satellite-Coordinates">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -11855,7 +11877,7 @@ python PATH.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The imported data contains excess HTML code, which is undesireable. I remove anything before and after the TLE code, leaving 3 lines of useful data for intepretation</p>
+<p>The imported data contains excess HTML code, which is undesireable. I therefore remove anything before and after the TLE code, leaving 3 lines of useful data for intepretation</p>
 
 </div>
 </div>
@@ -11929,7 +11951,7 @@ ISS (ZARYA)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I then proceed to use the ephem module to decipher the TLE information and print it in order to validate the information</p>
+<p>I then to use the ephem module to decipher the TLE information and print it in order to validate the information</p>
 
 </div>
 </div>
@@ -12054,7 +12076,7 @@ Spatial Resolution of current altitude with the 35 mm lens:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As seen in the code I create a figure of Earth base on the orthogonal projection method found in Basemap. I've set the projection to center on the satellite's current position. This is defined by lon_0 and lat_0. The graphics of the globe are then defined by the map.etopo() command. Change this to map.bluemarble gives a more realistic but darker world map. The remaining lines draws the coastlines and countries with a linewidth of 0.25 pixels. I define the continents colors as green, lakes as blue and the boundary as aqua.</p>
+<p>As seen in the code I create a figure of Earth based on the orthogonal projection method found in Basemap. I've set the projection to center on the satellite's current position. This is defined by lon_0 and lat_0. The graphics of the globe are then defined by the map.etopo() command. If I change this to "map.bluemarble", it gives a more realistic but darker world map. The remaining lines draws the coastlines and countries with a linewidth of 0.25 pixels. I define the continents colors as green, lakes as blue and the boundary as aqua.</p>
 <p>The next bit of code plots the sallite as a red dot. This is fed straight from the TLE through the ylongr,ylattr. Where a conversion takes place from strings to integers in order to satisfy the Basemap modules requirements. The name of the satellite is also being plotted as specified in the plt.text command.</p>
 
 </div>
@@ -13793,7 +13815,7 @@ XcgL1+PZhbxwPZ5dyAvX49mFvHA9nl3IC9fj2YW8cD2eXeh/ALRJ4ZrrHAx6AAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I then proceed to construct a 2D cylindrical Earth projection. This map is relatively simple in comparison to the 3D Globe, as the observation point is always centered. Same as earlier, the longitude and latitude of the satellite has to be converted into a new set of integers for it to work. These had to be different of the previous sat_lon &amp; sat_lat, or Basemap would protest. These coordinates are then plotted on the map as red dot, just as seen above.</p>
+<p>I then proceed to construct a 2D Earth projection. This map is relatively simple in comparison to the 3D Globe, as the observation point is always centered. Same as earlier, the longitude and latitude of the satellite has to be converted into a new set of integers for it to work. These had to be different of the previous sat_lon &amp; sat_lat, or Basemap would protest. These coordinates are then plotted on the map as a red dot, just as seen previously.</p>
 
 </div>
 </div>
@@ -14466,7 +14488,7 @@ c42qJE3GAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This part utilizes the opensource weather map from openweathermap.org and Google Earth Imagery. In order for python to access these website and the images, a work around had to be deployed, as images can't be extracted directly from this website. This is done by adding the Google Chrome Webdriver executeable file to a PATH that python recognizes. It's own "bin" directory should suffice. Now with a working webdriver. This code will launch a temporary browser window, which accesses a most current weathermap and Google Earth, for the region specified by satellite's current longitude and latitude. This is added straight into the URL command. I've also defined a standard zoom level at 7 for the weathermap, as it is reasonable for identifying the region and current weather patterns. The window lasts for 8 seconds, as a buffer in case of periods with slow load times. However most of the time 3-4 seconds are sufficient. The browser window is then screenshotted saved as the image "currentweather.png". The browser then shuts itself back down.</p>
+<p>This part utilizes the opensource weather map from openweathermap.org and Google Earth Imagery. In order for python to access these website and the images, a work around had to be deployed, as images can't be extracted directly from this website. This is done by adding the Google Chrome Webdriver executeable file to a PATH that python recognizes. It's own "bin" directory should suffice. Now with a working webdriver. This code will launch a temporary browser window, which accesses a most current weathermap and Google Earth, for the region specified by satellite's current longitude and latitude. This is added straight into the URL command. I've also defined a standard zoom level at 7 for the weathermap, as it is reasonable for identifying the region and current weather patterns. The window lasts for 8 seconds, as a buffer in case of periods with slow load times. However most of the time 3-4 seconds are sufficient. The browser window is then screenshotted and saved as the image "currentweather.png". The browser then shuts itself back down.</p>
 <p>Note:</p>
 <p>If the image at times appears incomplete with purple streaks, its due to the lack of weather images in the current region.</p>
 
@@ -14512,7 +14534,7 @@ c42qJE3GAAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I then proceed to crop the image in order to reduce as much junk and clutter as possible. I save this file as "currentweathercropped.png"</p>
-<p>Note: If the images arent cropped properly, there might be issues with your PIL library access to the img.crop command. I have it succesfully tested on both Ubuntu and Windows.</p>
+<p>Note: If the images arent cropped properly, there might be issues with your PIL library access to the img.crop command. Reinstalling of the module may fix it.</p>
 
 </div>
 </div>
@@ -14554,7 +14576,7 @@ c42qJE3GAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now for the final image, I repeat the procedure but with a Google Earth map. This map better for determining what the region would look like, if there was no clouds. The image zoom is set to 8, as it corresponds to 7 on the previous map. As this webpage loads faster, I've set the load time to a shorter value. Once complete, the image is stored as "GECurrent.png"</p>
+<p>Now for the final image, I repeat the procedure but with a Google Earth map. This map is better for determining what the region would look like, if there was no clouds. The image zoom is set to 8, as it corresponds to 7 on the previous map. As this webpage loads faster, I've set the load time to a shorter value. Once complete, the image is stored as "GECurrent.png"</p>
 
 </div>
 </div>
@@ -14585,7 +14607,6 @@ c42qJE3GAAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Again I crop the map, removing unwanted clutter and save it as "GECurrentcropped.png"</p>
-<p>Note: If the images arent cropped properly, there might be issues with your PIL library access to the img.crop command. I have it succesfully tested on both Ubuntu and Windows.</p>
 
 </div>
 </div>
@@ -14662,8 +14683,8 @@ c42qJE3GAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I've used the tkinter module for building the GUI. It is setup with a headline, followed by a textbox with all relevant information and finally by the 4 images previous obtained. Then at the bottom there is a Refresh key, that will close the window and re-initialize the script in order to extra the newest information.</p>
-<p>Note: Tkinter has a lot of issues with python 2.6. If errors in relation to pyximage occurs, the program needs to be shut down and run again. Then it works flawlessly.</p>
+<p>I've used the tkinter module for building the GUI. It is setup with a headline, followed by a textbox with all relevant information and finally by the 4 images previously obtained.</p>
+<p>Note: Tkinter has a lot of issues with python 2.6. If errors in relation to pyximage occurs, spyder needs to be shut down and restarted completely. Then it works flawlessly.</p>
 
 </div>
 </div>
@@ -14743,15 +14764,19 @@ c42qJE3GAAAAAElFTkSuQmCC
 <span class="n">gearth1</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span><span class="p">)</span>
 <span class="n">bottomtext</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
 
-<span class="k">def</span> <span class="nf">RefreshAction</span><span class="p">():</span>
-    <span class="n">execfile</span><span class="p">(</span><span class="s2">&quot;SatTracker.py&quot;</span><span class="p">)</span>
+<span class="c1">#This part puts a &quot;Refresh Data&quot; button at the bottom of the tkinter window. The button serves as a kill command for the open</span>
+<span class="c1">#GUI and then it would run the script again to renew the GUI with the new location. However, doing this more than 3 times</span>
+<span class="c1">#Would bug the entire code. Due to a lack of time, I&#39;ve left the code out-commented for now. </span>
 
-<span class="k">def</span> <span class="nf">CloseWindow</span><span class="p">():</span>
-    <span class="n">window</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+<span class="c1">#def RefreshAction():</span>
+    <span class="c1">#execfile(&quot;SatTracker.py&quot;)</span>
 
-<span class="n">button</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
-<span class="n">button</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;Refresh Data&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:[</span><span class="n">CloseWindow</span><span class="p">(),</span><span class="n">RefreshAction</span><span class="p">()])</span>
-<span class="n">button</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="c1">#def CloseWindow():</span>
+    <span class="c1">#window.destroy()</span>
+
+<span class="c1">#button = tk.Frame(window)</span>
+<span class="c1">#button = tk.Button(text=&#39;Refresh Data&#39;, width=25,command=lambda:[CloseWindow(),RefreshAction()])</span>
+<span class="c1">#button.pack()</span>
 
 <span class="n">window</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
 </pre></div>
@@ -14765,7 +14790,7 @@ c42qJE3GAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="attachment:gui_run.JPG" alt="gui_run.JPG"></p>
+<p><img src="gui_run.JPG" alt="gui_run.JPG"></p>
 
 </div>
 </div>
@@ -14774,7 +14799,24 @@ c42qJE3GAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>(The picture of the GUI is taken at a different time and thus doesn't correspond to the images above which was run at a different time)'</p>
+<p>The picture of the GUI is taken at a different time and thus doesn't correspond to the images above which was run at a different time. Do note that the Refresh Data button seen in the bottom, has been removed due to descrepancies bugging it out. After running 3 auto updates, it stops working. I've left it in the code out commented for now.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This code can easily be modified to track the current location of any satellite with an active Two-Line Element code. Thus, the code only need 5 numbers changed, in order to be able to follow the whereabouts of Delphini-1, once it is launched. Although the code does not provide predictive satellite behavior, it will identify a satellites current location in 4 different modes as seen on the GUI. The top most window provides interesting information about the satellites as well as its current spatial resolution based on its altitude. The left side middle picture, shows a 3D rotating image of Earth, with the current location of the satellite in relation to the penumbra. The right side middle picture portrays the exact same image, but on a flat mercator map. The bottom left side picture is snapped directly from a website that provides weather image in the region. This function would play an important role in the case of Delphini-1, as the cloud coverage can pose significant problems when trying to image the ground. The bottom right side picture shows a Google Earth equivalent of the region. As cloud cover can obscure the ground, the Google Earth image makes it easier to establish where exactly the satellite is currently located</p>
 
 </div>
 </div>

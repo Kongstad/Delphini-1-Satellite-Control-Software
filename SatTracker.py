@@ -282,6 +282,9 @@ gearth1 = tk.Label(bottomtext, text="Google Earth Image")
 gearth1.pack(side = "left")
 bottomtext.pack()
 
+#This part puts a "Refresh Data" button at the bottom of the tkinter window. The button serves as a kill command for the open
+#GUI and then it would run the script again to renew the GUI with the new location. However, doing this more than 3 times
+#Would bug the entire code. Due to a lack of time, I've left the code out-commented for now. 
 #def RefreshAction():
 #    execfile("SatTracker.py")
 #

@@ -6,6 +6,7 @@ List of content.
 <b>SatTracker.ipynb</b> - The Jupyter notebook file, requires Python2 environment.
 <b>SatTracker.py</b> - The complete script.
 <b>SatTracker_Kongstad.pdf</b> - Contains the Notebook converted version to latex and then PDF. I recommend opening the HTML file instead.
+
 <b>chromedriver_win32.zip</b> - Contains the required Google Chrome Webdriver for succesfully launching the script. If you are on a Linux machine. Go to https://chromedriver.storage.googleapis.com/index.html?path=2.34/
 
 

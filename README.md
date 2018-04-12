@@ -1,5 +1,8 @@
 # Delphini-1-Satellite-Control-Software
 
+Edit: Since the code requires specific versions of the different modules, I've zipped the entire python27 environment into this dropbox file. Size ~ 450 mb.
+https://www.dropbox.com/s/q9h4976lt3wce4h/Python27.rar?dl=0
+
 List of content.
 
 <b>SatTracker.html</b> - Contains the finished product in coloured HTML format. Recommend it for reading about the project. Download it, don't open it in github window.
